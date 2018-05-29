@@ -4,14 +4,15 @@ const connection = new signalR.HubConnectionBuilder()
 
 var circleList = [];
 
-var date = new Date();
+
 connection.on("RecieveColorPoint", (hue, x, y) => {    
     var newCircle = {
         "hue": hue,
         "x": x,
         "y": y,
-        "time": date.getUTCMilliseconds()
+        "tick": 0
     };
+    console.log("push");
     circleList.push(newCircle);
     if (circleList.length > 100)
         circleList.shift();
@@ -30,15 +31,33 @@ var sketch = function( p ) {
     p.noStroke();
   };
 
-  p.draw = function() {
+  p.draw = function() {    
     p.background(0);
     //console.log(circleList);
-    for (i = 0; i < circleList.length; i++) {        
+    if (circleList.length == 0)
+        return;
+
+    drawCircle(circleList[0]);
+    for (i = 1; i < circleList.length; i++) {        
         var circle = circleList[i];        
-        p.fill(circle.hue + 0.1, 1.0, 1.0, 0.1);        
-        p.ellipse(circle.x * p.windowWidth, circle.y * p.windowHeight, 300, 300);
+        drawCircle(circle);
+        if (circle.tick < circleList[i - 1].tick) {
+            circleList[i] = circleList[i - 1];
+            circleList[i - 1] = circle;
+        }
+    }
+    if (circleList[circleList.length - 1].tick > 300) {
+        console.log("shift");
+        circleList.pop();
     }
   };
+
+  function drawCircle(circle) {
+    circle.tick++;
+    var t = circle.tick / 300.0;
+    p.fill(circle.hue, 1.0, 1.0, 0.1 / (t + 2));        
+    p.ellipse(circle.x * p.windowWidth, circle.y * p.windowHeight, 600.0 * (t + 0.5), 600.0 * (t + 0.5));
+  }
 };
 
 var myp5 = new p5(sketch);
