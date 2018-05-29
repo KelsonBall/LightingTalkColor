@@ -1,5 +1,5 @@
 const connection = new signalR.HubConnectionBuilder()    
-    .withUrl("http://localhost:5000/drawapi")
+    .withUrl("/drawapi")
     .build();
 
 connection.start().catch(err => console.error(err.toString()));
