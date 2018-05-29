@@ -45,16 +45,16 @@ namespace colorserver
         {
             var point = new ColorPoint { hue = data.hue, x = data.x, y = data.y };
             Console.WriteLine(point.ToString());
-            await displayClients.Do(async displays =>
+            await displayClients.Do(async list =>
             {
-                foreach (var client in displays)
-                    await client.SendAsync("RecieveColorPoint", point);
+                foreach (var client in list)
+                    await client.SendAsync("RecieveColorPoint", point.hue, point.x, point.y);
             });
         }
 
         public async Task SubscribeAsDisplay()
         {
-            await displayClients.Do(list => list.Add(Clients.Caller));
+            await displayClients.Do(list => list.Add(Clients.Caller));            
         }
     }
 }

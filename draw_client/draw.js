@@ -8,11 +8,12 @@ connection.start().catch(err => console.error(err.toString()));
 
 var sketch = function( p ) {  
 
-  var numberOfCells = 30.0;
+  var numberOfCells = 120.0;
 
   p.setup = function() {
     p.createCanvas(p.windowWidth, p.windowHeight);
     p.colorMode(p.HSB, 1.0);
+    p.noStroke();
   };
 
 
