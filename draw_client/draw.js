@@ -4,20 +4,25 @@ const connection = new signalR.HubConnectionBuilder()
 
 connection.start().catch(err => console.error(err.toString()));
 
-var sketch = function( p ) {
+
+
+var sketch = function( p ) {  
+
+  var numberOfCells = 30.0;
 
   p.setup = function() {
     p.createCanvas(p.windowWidth, p.windowHeight);
     p.colorMode(p.HSB, 1.0);
   };
 
+
   p.draw = function() {
     p.background(0);
-    for (i = 0; i < 10; i++) {
-        p.fill(i / 10.0, 1.0, 1.0);
-        var x = i / 10.0 * p.windowWidth;
-        var x2 = x + p.windowWidth / 10.0;
-        p.rect(x, 0, x2, 20);
+    for (i = 0; i < numberOfCells; i++) {
+        p.fill(i / numberOfCells, 1.0, 1.0);
+        var x = i / numberOfCells * p.windowWidth;
+        var x2 = x + p.windowWidth / numberOfCells;
+        p.rect(x, 0, x2 + 1, 20);
     }
     p.fill(255);
     p.ellipse(p.mouseX,p.mouseY,10,10);
