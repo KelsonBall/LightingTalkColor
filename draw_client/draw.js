@@ -26,8 +26,7 @@ var sketch = function( p ) {
       var x = p.mouseX / p.windowWidth;
       var y = p.mouseY / p.windowHeight;
       console.log(hue, x, y);
-      //connection.invoke("AddColorPoint", 0.0, p.mouseX / p.windowWidth, p.mosueY / p.windowHeight);
-      connection.invoke("ShowMessage", "Hello World!");
+      connection.invoke("AddColorPoint", { "hue": hue, "x": x, "y": y });      
     }
   };
 };

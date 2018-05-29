@@ -34,7 +34,7 @@ namespace colorserver
 
     public class ColorHub : Hub
     {
-        private static Actor<List<IClientProxy>> displayClients;
+        private static Actor<List<IClientProxy>> displayClients = new Actor<List<IClientProxy>>(new List<IClientProxy>());
 
         public async Task ShowMessage(string message)
         {
