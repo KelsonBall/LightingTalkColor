@@ -1,0 +1,14 @@
+body {
+    margin-left:-35px;
+    margin:0px;
+    background: white;
+    height:100%;
+    width:100%;
+}
+
+html {
+    height:100%;
+    width:100%;
+    padding:0px;
+    touch-action:none;
+}
