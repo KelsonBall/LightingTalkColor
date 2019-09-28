@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace colorserver
+namespace LightingTalkColor
 {
     public class Startup
     {

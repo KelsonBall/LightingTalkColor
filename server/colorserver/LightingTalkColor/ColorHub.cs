@@ -3,15 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace colorserver
+namespace LightingTalkColor
 {
     public class ColorHub : Hub
     {
-        private static Actor<List<IClientProxy>> displayClients = new Actor<List<IClientProxy>>(new List<IClientProxy>());
+        private static readonly Actor<List<IClientProxy>> displayClients = new Actor<List<IClientProxy>>(new List<IClientProxy>());
 
         public async Task ShowMessage(string message)
         {
-            Console.WriteLine(message);
+            await Console.Out.WriteLineAsync(message);
         }
 
         public async Task AddColorPoint(dynamic data)
